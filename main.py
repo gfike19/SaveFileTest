@@ -17,29 +17,19 @@ def index():
     if request.method == "POST":
         try:
             given = request.form['someText']
-            # someText = open("/c/Users/aerot/coding/saveFileTest/templates/sometext.txt", "w")
             someText = open("someText.txt", "w+")
             someText.write(given)
             someText.close()
             return redirect("/downloads")
         except Exception as e:
             return str(e)
-            # return redirect("/return-files/")
 
-        # except Exception as e:
-        #     return str(e)
 @app.route("/downloads")
 def download():
     try:
         return send_file("someText.txt", as_attachment=True, attachment_filename='sometext.txt')
     except Exception as e:
             return str(e)
-# @app.route('/return-files/')
-# def return_files_tut():
-# 	try:
-# 		return send_file('/c/Users/aerot/coding/saveFileTest/templates/sometext.txt', attachment_filename='sometext.txt')
-# 	except Exception as e:
-# 		return str(e)
 
 if __name__ == "__main__":
     app.run()
